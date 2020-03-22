@@ -1,0 +1,29 @@
+<aura:component >
+    <aura:attribute name="parentPicklistValue" type="List"  default="[{text:'India',value:'India'},{text:'Malaysia',value:'Malaysia'}]"/>
+    <aura:attribute name="dependentPicklistValue" type="List" />
+    <aura:attribute name="mapOfDependentPicklistValue" type="Map" default="{India:[{text:'Rajasthan',value:'Rajasthan'},{text:'Gujrat',value:'Gujrat'}],Malaysia:[{text:'Selangor',value:'Selangor'},{text:'Penang',value:'Penang'}]}" />
+    <aura:attribute name="disableDependent" type="boolean" default="true" />
+    
+    <div class="slds-grid slds-gutters slds-p-around_x-small">
+          <div class="slds-col slds-size_1-of-6 ">
+             <lightning:select aura:id="parentPicklist" label="Country" name="country"   onchange="{!c.handleOnChange}">
+                <option value="">--None--</option>
+                <aura:iteration items="{!v.parentPicklistValue}" var="item">
+                  <option value="{!item.value}">{!item.text}</option>
+                </aura:iteration>
+            </lightning:select>
+          </div>
+    </div>
+    
+  <div class="slds-grid slds-gutters slds-p-around_x-small">
+      <div class="slds-col slds-size_1-of-6 ">
+         <lightning:select label="State" name="state" disabled="{!v.disableDependent}">
+            <option value="">--None--</option>
+            <aura:iteration items="{!v.dependentPicklistValue}" var="item">
+              <option value="{!item.value}">{!item.text}</option>
+            </aura:iteration>
+        </lightning:select>
+      </div>
+    </div>
+    
+</aura:component>
